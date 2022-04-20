@@ -8,35 +8,22 @@ import androidx.lifecycle.ViewModelProvider
 import com.demo.quiz.databinding.ActivityMainBinding
 import com.demo.quiz.viewmodel.QuestionViewModel
 
-
-private const val TAG = "MainActivity"
-
 class MainActivity : AppCompatActivity() {
-    lateinit var questionViewModel: QuestionViewModel
-
     lateinit var activityMainBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
+        startQuizFragment()
+    }
 
-        val quizFragment = QuizFragment()
-
+    private fun startQuizFragment() {
         supportFragmentManager.beginTransaction().apply {
+            val quizFragment = QuizFragment()
             add(activityMainBinding.container.id, quizFragment)
             addToBackStack(null)
             commit()
         }
-        questionViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
-
-
-        questionViewModel.getListOfResultsLiveData().observe(this, Observer {
-            Log.i(TAG, "onCreate: $it")
-        })
-
-//        activityMainBinding.buttonLoad.setOnClickListener {
-//            questionViewModel.startLoading()
-//        }
     }
 }

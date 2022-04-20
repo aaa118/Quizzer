@@ -5,12 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import com.demo.quiz.databinding.FragmentQuestionBinding
 import com.demo.quiz.model.Results
-import android.widget.RadioButton
-
-
 
 
 class QuestionFragment : Fragment() {
@@ -52,16 +50,12 @@ class QuestionFragment : Fragment() {
         }
     }
 
-    private fun setupQuestions(
-        _list: List<Results?>,
-        i: Int
-    ) {
+    private fun setupQuestions(_list: List<Results?>, i: Int) {
         fragmentQuestionBinding.answersRadioGroup.removeAllViews()
         fragmentQuestionBinding.questionTextView.text = _list[i]?.question ?: ""
         fragmentQuestionBinding.answersRadioGroup.orientation = LinearLayout.VERTICAL
         val incorrectAnswersList = _list[i]?.incorrectAnswers
         if (!incorrectAnswersList.isNullOrEmpty()) {
-//            var j = 0
             for (j in 0 until (incorrectAnswersList.size)) {
                 val radioButton = RadioButton(context)
                 radioButton.id = j
