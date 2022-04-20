@@ -7,5 +7,5 @@ data class QuizResponse(
     @SerializedName("response_code")
     val response: String,
     @SerializedName("results")
-    val listResults: List<Results>
+    val listResults: ArrayList<Results>
 )

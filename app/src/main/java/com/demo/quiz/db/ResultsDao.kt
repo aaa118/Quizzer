@@ -12,7 +12,7 @@ interface ResultsDao {
     fun getAll(): List<Results>
 
     @Insert
-    fun insertAll(vararg users: Results?)
+    fun insertAll(users: List<Results>)
 
 //    @Query("SELECT * FROM user WHERE uid IN (:userIds)")
 //    fun loadAllByIds(userIds: IntArray): List<User>

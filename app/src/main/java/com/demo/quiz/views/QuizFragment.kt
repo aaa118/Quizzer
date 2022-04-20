@@ -1,7 +1,6 @@
 package com.demo.quiz.views
 
 import android.os.Bundle
-import android.os.Parcelable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +12,7 @@ import com.demo.quiz.R
 import com.demo.quiz.databinding.FragmentQuizBinding
 import com.demo.quiz.model.Results
 import com.demo.quiz.viewmodel.QuestionViewModel
+import com.demo.quiz.viewmodel.ViewModelFactory
 import java.util.ArrayList
 
 private const val TAG = "QuizFragment"
@@ -20,7 +20,7 @@ private const val TAG = "QuizFragment"
 class QuizFragment : Fragment() {
 
     lateinit var fragmentQuizBinding: FragmentQuizBinding
-    lateinit var questionViewModel: QuestionViewModel
+    private lateinit var questionViewModel: QuestionViewModel
 
 
     override fun onCreateView(
@@ -29,7 +29,7 @@ class QuizFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         fragmentQuizBinding = FragmentQuizBinding.inflate(inflater,container, false)
-        questionViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
+        questionViewModel = ViewModelProvider(this, ViewModelFactory(context)).get(QuestionViewModel::class.java)
 
         return fragmentQuizBinding.root
     }

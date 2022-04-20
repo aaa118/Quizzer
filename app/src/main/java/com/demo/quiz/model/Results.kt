@@ -17,5 +17,5 @@ data class Results(
     @SerializedName("correct_answer")
     val correctAnswer: String,
     @SerializedName("incorrect_answers")
-    val incorrectAnswers: List<String>,
+    val incorrectAnswers: ArrayList<String>,
 ) : Parcelable
