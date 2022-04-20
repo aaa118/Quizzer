@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface QuizService {
     @GET("api.php?amount=10&category=9&difficulty=medium&type=multiple")
-    fun getResponse(): Call<QuizResponse>?
+   suspend fun getResponse(): QuizResponse?
 }

@@ -1,18 +1,13 @@
-package com.demo.quiz
+package com.demo.quiz.views
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.demo.quiz.api.RetrofitInstance
 import com.demo.quiz.databinding.ActivityMainBinding
-import com.demo.quiz.model.QuizResponse
-import com.demo.quiz.model.Results
 import com.demo.quiz.viewmodel.QuestionViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 
 private const val TAG = "MainActivity"
 
@@ -26,6 +21,13 @@ class MainActivity : AppCompatActivity() {
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
 
+        val quizFragment = QuizFragment()
+
+        supportFragmentManager.beginTransaction().apply {
+            add(activityMainBinding.container.id, quizFragment)
+            addToBackStack(null)
+            commit()
+        }
         questionViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
 
 
@@ -33,10 +35,8 @@ class MainActivity : AppCompatActivity() {
             Log.i(TAG, "onCreate: $it")
         })
 
-        activityMainBinding.buttonLoad.setOnClickListener {
-            questionViewModel.startLoading()
-        }
-
-
+//        activityMainBinding.buttonLoad.setOnClickListener {
+//            questionViewModel.startLoading()
+//        }
     }
 }

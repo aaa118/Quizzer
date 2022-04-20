@@ -8,40 +8,17 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class QuizRepository {
-    private val TAG = "QuizRepository"
+private const val TAG = "QuizRepository"
 
-     fun makeSyncApiCall(): List<Results?>? {
+class QuizRepository {
+
+    suspend fun makeSyncApiCall(): List<Results?>? {
         val retrofitInstance = RetrofitInstance()
-        val response = retrofitInstance.setupRetrofitInstance()?.getResponse()?.execute()
+        val response = retrofitInstance.setupRetrofitInstance()?.getResponse()
         if (response != null) {
-            if (response.isSuccessful) {
-                return response.body()?.listResults
-            }
+            Log.i(TAG, "makeSyncApiCall: $response")
+            return response.listResults
         }
         return null
-    }
-
-    suspend fun makeApiCall() : List<Results?>? {
-        val retrofitInstance = RetrofitInstance()
-        var listOfResults: List<Results?>? = null
-        retrofitInstance.setupRetrofitInstance()?.getResponse()?.enqueue(object :
-            Callback<QuizResponse?> {
-            override fun onResponse(
-                call: Call<QuizResponse?>,
-                response: Response<QuizResponse?>
-            )  {
-                if (response.isSuccessful && response.body() != null) {
-                    listOfResults = response.body()!!.listResults
-
-                }
-            }
-
-            override fun onFailure(call: Call<QuizResponse?>, t: Throwable) {
-                Log.i(TAG, "onResponse: ${t.localizedMessage}")
-            }
-
-        })
-        return listOfResults
     }
 }
