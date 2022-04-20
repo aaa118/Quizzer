@@ -55,7 +55,6 @@ class QuizFragment : Fragment() {
                 }
             }
             replace(R.id.container, questionFragment)
-            val res = "srtar"
             addToBackStack(null)
             commit()
         }
